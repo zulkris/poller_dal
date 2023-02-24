@@ -1,0 +1,46 @@
+version: '3'
+
+services:
+  app:
+    container_name: app
+    build:
+      context: .
+      dockerfile: ./docker/Dockerfile
+      args:
+        - DOCKER_UID=1000
+        - SERVICE_DIR=/spool/services/poller_dal
+    volumes:
+      - ./:/spool/services/poller_dal
+    tty: true
+    restart: unless-stopped
+    ports:
+      - "80:4000"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    networks:
+      - elixir-network
+      - elixir-network-internal
+    depends_on:
+      - postgres
+
+  postgres:
+    container_name: postgres
+    image: postgres:13
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      PGDATA: /data/postgres/data
+    volumes:
+      - ./docker/pgdata:/data/postgres
+    ports:
+      - "5432:5432"
+    networks:
+      - elixir-network-internal
+    restart: unless-stopped
+
+networks:
+  elixir-network:
+    name: elixir-network
+    external: true
+  elixir-network-internal:
+    external: false
