@@ -1,21 +1,19 @@
 # PollerDal
 
-**TODO: Add description**
+**DAL - data abstraction layer**
 
 ## Installation
 
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed
-by adding `poller_dal` to your list of dependencies in `mix.exs`:
+- `docker-compose up`
 
-```elixir
-def deps do
-  [
-    {:poller_dal, "~> 0.1.0"}
-  ]
-end
+## Using
+
+inside main container (connect to it via `docker exec -it app sh`) you can start any commands:
+
+for example:
 ```
-
-Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
-and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
-be found at [https://hexdocs.pm/poller_dal](https://hexdocs.pm/poller_dal).
+/spool/services/poller_dal $ mix ecto.rollback
+21:56:56.054 [info]  == Running 20230224150122 PollerDal.Repo.Migrations.CreateDistricts.change/0 backward
+21:56:56.056 [info]  == Migrated 20230224150122 in 0.0s
+```
 
