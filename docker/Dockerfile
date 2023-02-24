@@ -13,8 +13,8 @@ RUN mkdir /.npm && chmod 777 /.npm
 # hex and phoenix
 RUN apk add inotify-tools # phoenix need it
 RUN \
-    mix local.hex --force
-    # mix local.rebar --force && \
+    mix local.hex --force && \
+    mix local.rebar --force
     # mix archive.install hex phx_new 1.6.15 --force
 
 # run app

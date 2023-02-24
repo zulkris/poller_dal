@@ -1,2 +1,2 @@
-#!/bin/sh
+#!/usr/bin/sh
 docker-compose exec --user $(id -u) mix "$@"
